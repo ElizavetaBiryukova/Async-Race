@@ -1,0 +1,166 @@
+.body {
+    background: black;
+    min-height: 100%;
+    margin: 0;
+}
+
+.header,
+.main {
+    margin: 1%;
+    color: white;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    gap: 0.1%;
+}
+
+.button {
+    text-decoration: none;
+    color: white;
+    background: black;
+    position: relative;
+    padding: 0.3% 1%;
+    border: 1px solid;
+    border-image: linear-gradient(180deg, #ff3000, #ed0200, #ff096c, #d50082);
+    border-image-slice: 1;
+    margin: 0.3% 0.3%;
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: 2px;
+    transition: 0.8s cubic-bezier(.165, .84, .44, 1);
+}
+
+.button:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 0;
+    width: 100%;
+    z-index: -1;
+    color: white;
+    background: linear-gradient(180deg, #ff3000, #ed0200, #ff096c, #d50082);
+    transition: 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.button:hover {
+    background: rgba(255, 255, 255, 0);
+}
+
+.button:hover:before {
+    bottom: 0%;
+    top: auto;
+    height: 100%;
+}
+
+.generator-button {
+    padding: 0.3% 0.4%;
+}
+
+.race-button {
+    margin-left: 0%;
+}
+
+.form {
+    display: flex;
+    align-items: center;
+    gap: 0.5%;
+}
+
+.input {
+    width: 8%;
+    padding: 0.15% 0.3%;
+}
+
+.garage-list {
+    list-style-type: none;
+    padding-left: 0%;
+}
+
+.title {
+    font-size: 2em;
+}
+
+.console {
+    margin-bottom: 4%;
+}
+
+.select-button,
+.remove-button {
+    padding: 0.2% 0.3%;
+}
+
+.car-name {
+    font-size: 1.3em;
+}
+
+.road {
+    display: flex;
+    margin-top: 1%;
+    justify-content: space-between;
+    border-bottom: 3px dashed white;
+    align-items: flex-end;
+}
+
+.road-area {
+    display: flex;
+    gap: 25%;
+}
+
+.car-svg {
+    width: 150px;
+    height: 70px;
+}
+
+.flag {
+    font-size: 4em;
+}
+
+.controls {
+    display: flex;
+    align-items: flex-start;
+    gap: 10%;
+    width: max-content;
+    margin-left: 5%;
+}
+
+.control {
+    padding: 5% 15%;
+    font-weight: 900;
+    color: white;
+    background: linear-gradient(180deg, #ff3000, #ed0200, #ff096c, #d50082);
+    border: 1px solid #ff096c;
+}
+
+.control:hover {
+    padding: 5% 15%;
+    font-weight: 900;
+    color: white;
+    background: #ff096c;
+    border: 1px solid #ff096c;
+}
+
+table {
+    border-collapse: collapse;
+    border-radius: 5px;
+    margin: 20px 0px;
+}
+
+thead {
+    background-color: rgba(212, 3, 3, 0.24);
+    border-radius: 5px;
+}
+
+th {
+    padding: 10px 20px;
+}
+
+td {
+    padding: 5px 20px;
+}
+
+tbody {
+    border-collapse: collapse;
+}
