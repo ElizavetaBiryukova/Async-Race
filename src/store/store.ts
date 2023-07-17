@@ -1,7 +1,8 @@
-import { IStorageObj } from "../types/types";
+import { StorageObj } from "../types/types";
 
-export const store: IStorageObj = {
-    cars: 1,
-    winners: 1,
-    pages: 1,
-  };
+export const store: StorageObj = {
+  carsArr: [],
+  cars: 1,
+  winners: 1,
+  pages: 1,
+};

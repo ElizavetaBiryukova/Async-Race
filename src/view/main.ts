@@ -1,12 +1,12 @@
 import { createConsoleTemplate } from "./console"
-import { createGarageTemplate } from "./garage"
+import { createGarageListTemplate } from "./garage-list"
 import { createPaginationTemplate } from "./pagination"
 import { createWinnersTemplate } from "./winners"
 
 const createMainTemplate = (): string => (
     `<main class="main">
     ${createConsoleTemplate()}
-    ${createGarageTemplate()}
+    ${createGarageListTemplate()}
     ${createWinnersTemplate()}
     ${createPaginationTemplate()}
     </main>`
