@@ -2,9 +2,10 @@ import { Car, Cars, CreateCar } from "../types/types";
 import { store } from "../store/store";
 
 const path = 'http://localhost:3000';
+const garage = `${path}/garage`;
 
-export const getCars = async (page: number): Promise<Cars> => {
-    const res = await fetch(`${path}/garage/?_page=${page}`);
+export const getCars = async (): Promise<Cars> => {
+    const res = await fetch(`${garage}`);
     const carsCount = {
         items: await res.json(),
         count: Number(res.headers.get('X-Total-Count')),
@@ -14,26 +15,23 @@ export const getCars = async (page: number): Promise<Cars> => {
 
 
 export const updateCarsStore = async () => {
-    const { items, count } = await getCars(store.pages);
+    const { items, count } = await getCars();
     store.carsArr = items;
     store.cars = count;
 };
 
 export const getCar = async (id: number): Promise<Car> =>
     (
-        await fetch(`${path}/garage/${id}`, {
+        await fetch(`${garage}/${id}`, {
             method: 'GET',
         })
     ).json();
 
 
 
-
-
-
 export const createCar = async (car: CreateCar) =>
     (
-        await fetch(`${path}/garage`, {
+        await fetch(`${garage}`, {
             method: 'POST',
             body: JSON.stringify(car),
             headers: {
