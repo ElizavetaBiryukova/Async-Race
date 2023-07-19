@@ -6,6 +6,7 @@ import { updateCarsStore } from "./get-cars";
 import { togglePage } from "./toggle-pages";
 import { generateCars } from "./generate-cars";
 import { createCarEvent } from "./create-car";
+import { removeCar } from "./remove-car";
 
 const siteBodyElement: HTMLElement | null = document.querySelector('.body');
 
@@ -17,6 +18,7 @@ const renderPage = async () => {
     togglePage();
     generateCars();
     createCarEvent();
+    removeCar();
 }
 
 renderPage();

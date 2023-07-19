@@ -3,7 +3,7 @@ import { store } from "../store/store";
 
 const createGarageListTemplate = (): string => {
     return `
-        ${store.carsArr.map((car) => `<li id ="car-road-${car.id}">${createGarageItemTemplate(car)}</li>`).join('')}
+        ${store.carsArr.map((car) => `<li class='car-item' id ="car-${car.id}">${createGarageItemTemplate(car)}</li>`).join('')}
 `
 };
 

@@ -9,12 +9,6 @@ export const createCarEvent = async () => {
     const garageList: HTMLElement | null = document.querySelector('.garage-list');
     const garageTitle: HTMLElement | null = document.querySelector('.title-garage');
 
-//     let map = new Map();
-// map.set('banana', 1);
-// map.set('orange', 2);
-// map.set('meat', 4);
-
-// let obj = Object.fromEntries(map.entries()); // создаём обычный объект (*)
 
     createCarButton?.addEventListener('click', async () => {
         const newCreateCar = new Map();
