@@ -1,9 +1,9 @@
-import { store } from "../store/store";
 import { getRandomInteger } from "./util";
 import { carsNames, carsModels } from "./const";
 import { CreateCar } from "../types/types";
 import { createCar, updateCarsStore } from "./get-cars";
 import { createGarageListTemplate } from "../view/garage-list";
+import { createTitle } from "../view/title";
 
 const generateName = (): string => {
     const randomIndexNames = getRandomInteger(0, carsNames.length - 1);
@@ -20,21 +20,18 @@ export const generateCar = (): CreateCar => ({
     color: generateColor(),
 });
 
-
-// console.log(hundredCars)
 export const generateCars = async () => {
     const generateCarsButton: HTMLElement | null = document.querySelector('.generator-button');
-    const garageList: HTMLElement | null = document.querySelector('.garage-list')
+    const garageList: HTMLElement | null = document.querySelector('.garage-list');
+    const garageTitle: HTMLElement | null = document.querySelector('.title-garage');
 
     generateCarsButton?.addEventListener('click', async () => {
-        // console.log(store)
-        // store.carsArr = store.carsArr.concat(hundredCars);
         const hundredCars: CreateCar[] = new Array(100).fill(0).map(generateCar);
 
-        console.log(hundredCars)
         await Promise.all(hundredCars.map(async (car) => createCar(car)));
         await updateCarsStore();
         (garageList as HTMLElement).innerHTML = createGarageListTemplate();
-        console.log(store)
+        (garageTitle as HTMLElement).innerHTML = createTitle('Garage');
+
     })
 }

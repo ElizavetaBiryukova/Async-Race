@@ -5,6 +5,7 @@ import { RenderPosition } from "./const";
 import { updateCarsStore } from "./get-cars";
 import { togglePage } from "./toggle-pages";
 import { generateCars } from "./generate-cars";
+import { createCarEvent } from "./create-car";
 
 const siteBodyElement: HTMLElement | null = document.querySelector('.body');
 
@@ -15,6 +16,7 @@ const renderPage = async () => {
     render(siteBodyElement as HTMLElement, createMainTemplate(), RenderPosition.BEFOREEND);
     togglePage();
     generateCars();
+    createCarEvent();
 }
 
 renderPage();
