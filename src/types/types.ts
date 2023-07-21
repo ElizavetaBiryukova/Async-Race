@@ -1,6 +1,7 @@
 export interface StorageObj {
   carsArr: Array<Car>
   cars: number,
+  idCar: number | null,
   winners: number,
   pages: number,
 }

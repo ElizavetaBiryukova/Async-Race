@@ -8,6 +8,7 @@ import { generateCars } from "./generate-cars";
 import { createCarEvent } from "./create-car";
 import { removeCar } from "./remove-car";
 import { selectCar } from "./select-car";
+import { updateCarEvent } from "./update-car";
 
 const siteBodyElement: HTMLElement | null = document.querySelector('.body');
 
@@ -21,6 +22,7 @@ const renderPage = async () => {
     createCarEvent();
     removeCar();
     selectCar();
+    updateCarEvent();
 }
 
 renderPage();

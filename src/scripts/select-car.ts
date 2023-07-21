@@ -1,4 +1,5 @@
 import { getCar } from "./get-cars";
+import { store } from "../store/store";
 
 export const selectCar = async () => {
     const garage: HTMLElement | null = document.querySelector('.garage-list');
@@ -8,6 +9,7 @@ export const selectCar = async () => {
     garage?.addEventListener('click', async (event) => {
         if ((event.target as HTMLElement).classList.contains('select-button')) {
             const carId = Number(((event.target as HTMLElement).closest('li.car-item') as HTMLElement).id.replace('car-', ''));
+            store.idCar = carId;
             const selectedCar = await getCar(carId);
             (updateName as HTMLInputElement).value = selectedCar.name;
             (updateColor as HTMLInputElement).value = selectedCar.color;
