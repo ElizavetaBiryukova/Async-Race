@@ -15,7 +15,6 @@ export const createCarEvent = async () => {
         newCreateCar.set((createCarInput as HTMLInputElement).name, (createCarInput as HTMLInputElement).value);
         newCreateCar.set((createCarColor as HTMLInputElement).name, (createCarColor as HTMLInputElement).value);
         const car = Object.fromEntries(newCreateCar);
-        console.log(car)
         await createCar(car);
         await updateCarsStore();
         (garageList as HTMLElement).innerHTML = createGarageListTemplate();
