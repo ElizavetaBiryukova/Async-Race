@@ -2,7 +2,7 @@ import { render } from "./render";
 import { createHeaderTemplate } from "../view/header";
 import { createMainTemplate } from "../view/main";
 import { RenderPosition } from "./const";
-import { updateCarsStore } from "./get-cars";
+import { updateCarsStore } from "./api";
 import { togglePage } from "./toggle-pages";
 import { generateCars } from "./generate-cars";
 import { createCarEvent } from "./create-car";

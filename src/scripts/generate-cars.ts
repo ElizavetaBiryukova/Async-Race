@@ -1,7 +1,7 @@
 import { getRandomInteger } from "./util";
 import { carsNames, carsModels } from "./const";
 import { CreateCar } from "../types/types";
-import { createCar, updateCarsStore } from "./get-cars";
+import { createCar, updateCarsStore } from "./api";
 import { createGarageListTemplate } from "../view/garage-list";
 import { createTitle } from "../view/title";
 

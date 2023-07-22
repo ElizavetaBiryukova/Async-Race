@@ -1,4 +1,4 @@
-import { deleteCar, updateCarsStore } from "./get-cars";
+import { deleteCar, updateCarsStore } from "./api";
 import { createGarageListTemplate } from "../view/garage-list";
 import { createTitle } from "../view/title";
 

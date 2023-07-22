@@ -5,7 +5,6 @@ export const togglePage = async () => {
     const winnersBoard: HTMLElement | null = document.querySelector('.winners');
     const consoleBoard: HTMLElement | null = document.querySelector('.console');
 
-
     garageButton?.addEventListener('click', async () => {
         (winnersBoard as HTMLElement).style.display = 'none';
         (garageBoard as HTMLElement).style.display = 'block';
@@ -19,3 +18,5 @@ export const togglePage = async () => {
     })
 
 }
+
+

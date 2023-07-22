@@ -21,3 +21,9 @@ export interface CreateCar {
   name: string;
   color: string;
 }
+
+export interface CarMovement {
+    velocity: number,
+    distance: number
+
+}

@@ -1,4 +1,4 @@
-import { getCar } from "./get-cars";
+import { getCar } from "./api";
 import { store } from "../store/store";
 
 export const selectCar = async () => {
