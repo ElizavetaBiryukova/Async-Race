@@ -3,8 +3,10 @@ export interface StorageObj {
   cars: number,
   idCar: number | null,
   winners: number,
-  pages: number,
-  winnersArr: Array<Winner>
+  carsPage: number,
+  winnersPage: number,
+  winnersArr: Array<Winner>,
+  openSection: string,
 }
 
 export interface Car {

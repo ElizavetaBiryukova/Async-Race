@@ -6,7 +6,6 @@ import { createWinnersListTemplate } from "../view/winners-list";
 
 export const removeCar = async () => {
     const garage: HTMLElement | null = document.querySelector('.garage-list');
-    const garageList: HTMLElement | null = document.querySelector('.garage-list');
     const garageTitle: HTMLElement | null = document.querySelector('.title-garage');
     const winnersList: HTMLElement | null = document.querySelector('.winners-list');
     const winnersTitle: HTMLElement | null = document.querySelector('.title-winners');
@@ -20,7 +19,7 @@ export const removeCar = async () => {
             await updateCarsStore();
             await updateWinnersStore();
 
-            (garageList as HTMLElement).innerHTML = createGarageListTemplate();
+            (garage as HTMLElement).innerHTML = createGarageListTemplate();
             (garageTitle as HTMLElement).innerHTML = createTitle('Garage');
 
             (winnersList as HTMLElement).innerHTML = createWinnersListTemplate();

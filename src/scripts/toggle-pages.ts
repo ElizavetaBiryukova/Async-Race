@@ -1,3 +1,5 @@
+import { store } from "../store/store";
+
 export const togglePage = async () => {
     const garageButton: HTMLElement | null = document.querySelector('.button-garage');
     const garageBoard: HTMLElement | null = document.querySelector('.garage');
@@ -9,12 +11,16 @@ export const togglePage = async () => {
         (winnersBoard as HTMLElement).style.display = 'none';
         (garageBoard as HTMLElement).style.display = 'block';
         (consoleBoard as HTMLElement).style.display = 'block';
+
+        store.openSection = 'garage';
     })
 
     winnersButton?.addEventListener('click', async () => {
         (garageBoard as HTMLElement).style.display = 'none';
         (consoleBoard as HTMLElement).style.display = 'none';
         (winnersBoard as HTMLElement).style.display = 'block';
+
+        store.openSection = 'winners';
     })
 
 }

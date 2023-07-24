@@ -5,6 +5,8 @@ const PATH = 'http://localhost:3000';
 const GARAGE = `${PATH}/garage`;
 const ENGINE = `${PATH}/engine/`;
 const WINNERS = `${PATH}/winners`;
+const PAGE = `?_page=`;
+const LIMIT = `&_limit=`;
 const EngineParam = {
     ID: '?id=',
     STATUS: '&status=',
@@ -14,8 +16,8 @@ const EngineStatus = {
     STOP: 'stopped',
 }
 
-export const getCars = async (): Promise<Cars> => {
-    const res = await fetch(`${GARAGE}`);
+export const getCars = async (page: number, limit = 7): Promise<Cars> => {
+    const res = await fetch(`${GARAGE}${PAGE}${page}${LIMIT}${limit}`);
     const carsCount = {
         items: await res.json(),
         count: Number(res.headers.get('X-Total-Count')),
@@ -24,13 +26,13 @@ export const getCars = async (): Promise<Cars> => {
 };
 
 export const updateCarsStore = async () => {
-    const { items, count } = await getCars();
+    const { items, count } = await getCars(store.carsPage);
     store.carsArr = items;
     store.cars = count;
 };
 
 export const updateWinnersStore = async () => {
-    const { items, count } = await getWinners();
+    const { items, count } = await getWinners(store.winnersPage);
     store.winnersArr = items;
     store.winners = count;
 };
@@ -85,8 +87,8 @@ export const stopCar = async (id: number): Promise<CarMovement> =>
         })
     ).json();
 
-export const getWinners = async (): Promise<GetWinners> => {
-    const res = await fetch(`${WINNERS}`);
+export const getWinners = async (page: number, limit = 10): Promise<GetWinners> => {
+    const res = await fetch(`${WINNERS}${PAGE}${page}${LIMIT}${limit}`);
     const items = await res.json();
 
     return {
