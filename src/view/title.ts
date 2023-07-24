@@ -2,7 +2,7 @@ import { store } from "../store/store";
 
 const createTitle = (name: string): string => {
     return `
-    ${name}: ${name === 'Garage' ? store.carsArr.length : store.winners}</h1>
+    ${name}: ${name === 'Garage' ? store.carsArr.length : store.winnersArr.length}</h1>
 `
 }
 

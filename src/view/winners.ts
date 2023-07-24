@@ -13,7 +13,7 @@ const createWinnersTemplate = (): string => {
             <th>Wins</th>
             <th>Best time (seconds)</th>
         </thead>
-        <tbody>
+        <tbody class="winners-list">
         ${createWinnersListTemplate()}
         </tbody>
     </table>
