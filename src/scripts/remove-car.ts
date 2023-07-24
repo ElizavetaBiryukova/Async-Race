@@ -1,4 +1,4 @@
-import { deleteCar, updateCarsStore, deleteWinner, updateWinnersStore } from "./api";
+import { deleteCar, updateCarsStore, deleteWinner, updateWinnersStore, getWinner } from "./api";
 import { createGarageListTemplate } from "../view/garage-list";
 import { createTitle } from "../view/title";
 import { createWinnersListTemplate } from "../view/winners-list";
@@ -11,19 +11,22 @@ export const removeCar = async () => {
     const winnersTitle: HTMLElement | null = document.querySelector('.title-winners');
 
 
-    garage?.addEventListener('click',  async (event) => {
+    garage?.addEventListener('click', async (event) => {
         if ((event.target as HTMLElement).classList.contains('remove-button')) {
             const carId = Number(((event.target as HTMLElement).closest('li.car-item') as HTMLElement).id.replace('car-', ''));
             await deleteCar(carId);
-            await deleteWinner(carId);
+
+            if (await getWinner(carId)) {
+                await getWinner(carId)
+                await deleteWinner(carId);
+                await updateWinnersStore();
+                (winnersList as HTMLElement).innerHTML = createWinnersListTemplate();
+                (winnersTitle as HTMLElement).innerHTML = createTitle('Winners');
+            }
             await updateCarsStore();
-            await updateWinnersStore();
 
             (garage as HTMLElement).innerHTML = createGarageListTemplate();
             (garageTitle as HTMLElement).innerHTML = createTitle('Garage');
-
-            (winnersList as HTMLElement).innerHTML = createWinnersListTemplate();
-            (winnersTitle as HTMLElement).innerHTML = createTitle('Winners');
 
         }
     })
