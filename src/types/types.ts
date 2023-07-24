@@ -25,5 +25,22 @@ export interface CreateCar {
 export interface CarMovement {
     velocity: number,
     distance: number
+}
 
+export interface Winners {
+  id: number;
+  wins: number;
+  time: number;
+}
+
+export interface Winner {
+  id: number;
+  wins: number;
+  time: number;
+  car: Car;
+}
+
+export interface GetWinners {
+  items: Winner[];
+  count: number;
 }
