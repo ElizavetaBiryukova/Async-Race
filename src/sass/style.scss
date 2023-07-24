@@ -174,3 +174,8 @@ tbody {
 .winners {
     display: none;
 }
+
+.control-start:disabled,
+.control-stop:disabled{
+    background: grey;
+}

@@ -6,7 +6,13 @@ import { animation } from "./animation";
 
 
 export const startCarAnimation = async (id: number): Promise<WinnersCars> => {
+    const startButton: HTMLButtonElement | null = document.querySelector(`.control-start-${id}`);
+    const stopButton: HTMLButtonElement | null = document.querySelector(`.control-stop-${id}`);
+    (startButton as HTMLButtonElement).disabled = true;
+    (stopButton as HTMLButtonElement).disabled = false;
+
     const { velocity, distance } = await startCar(id);
+
     const time = Math.round(distance / velocity);
 
     const car: HTMLElement | null = document.querySelector(`.car-${id}`);
@@ -28,6 +34,11 @@ export const startCarAnimation = async (id: number): Promise<WinnersCars> => {
 };
 
 export const stopCarAnimation = async (id: number) => {
+    const startButton: HTMLButtonElement | null = document.querySelector(`.control-start-${id}`);
+    const stopButton: HTMLButtonElement | null = document.querySelector(`.control-stop-${id}`);
+    (startButton as HTMLButtonElement).disabled = false;
+    (stopButton as HTMLButtonElement).disabled = true;
+
     await stopCar(id);
     const car: HTMLElement | null = document.querySelector(`.car-${id}`);
     (car as HTMLElement).style.transform = 'translateX(0)';

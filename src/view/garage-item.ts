@@ -12,7 +12,7 @@ const createGarageItemTemplate = ({name, color, id}: Car): string => {
                 <div class="road-area">
                     <div class="controls">
                         <button class="control control-start control-start-${id}">Start</button>
-                        <button class="control control-stop control-stop-${id}">Stop</button>
+                        <button class="control control-stop control-stop-${id}" disabled>Stop</button>
                     </div>
                     <div class="car car-${id}">
                     ${createCarSvg(color)}
