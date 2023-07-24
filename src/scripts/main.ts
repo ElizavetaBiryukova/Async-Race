@@ -10,6 +10,7 @@ import { removeCar } from "./remove-car";
 import { selectCar } from "./select-car";
 import { updateCarEvent } from "./update-car";
 import { addPagination } from "./pagination";
+import { drivingCar } from "./start-stop-car";
 
 const siteBodyElement: HTMLElement | null = document.querySelector('.body');
 
@@ -26,6 +27,7 @@ const renderPage = async () => {
     selectCar();
     updateCarEvent();
     addPagination();
+    drivingCar();
 }
 
 renderPage();

@@ -1,4 +1,4 @@
-import { Car, Cars, CreateCar, CarMovement, Winners, GetWinners } from "../types/types";
+import { Car, Cars, CreateCar, CarMovement, Winners, GetWinners, Engine } from "../types/types";
 import { store } from "../store/store";
 
 const PATH = 'http://localhost:3000';
@@ -86,6 +86,11 @@ export const stopCar = async (id: number): Promise<CarMovement> =>
             method: 'PATCH'
         })
     ).json();
+
+export const driveCar = async (id: number): Promise<Engine> => {
+    const res = await fetch(`${ENGINE}?id=${id}&status=drive`, { method: 'PATCH' }).catch();
+    return res.status === 200 ? { ...(await res.json()) } : { success: false };
+};
 
 export const getWinners = async (page: number, limit = 10): Promise<GetWinners> => {
     const res = await fetch(`${WINNERS}${PAGE}${page}${LIMIT}${limit}`);

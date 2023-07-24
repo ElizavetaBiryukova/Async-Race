@@ -9,4 +9,5 @@ export const store: StorageObj = {
   winnersPage: 1,
   winnersArr: [],
   openSection: 'garage',
+  animation: {},
 };

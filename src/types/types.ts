@@ -7,6 +7,14 @@ export interface StorageObj {
   winnersPage: number,
   winnersArr: Array<Winner>,
   openSection: string,
+  animation: IObj,
+}
+
+export interface IObjNumber {
+  [id: string]: number;
+}
+export interface IObj {
+  [id: string]: IObjNumber;
 }
 
 export interface Car {
@@ -46,4 +54,14 @@ export interface Winner {
 export interface GetWinners {
   items: Winner[];
   count: number;
+}
+
+export type Engine = {
+  success: boolean;
+};
+
+export interface WinnersCars {
+  success: boolean;
+  id: number;
+  time: number;
 }
