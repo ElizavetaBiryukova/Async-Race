@@ -4,7 +4,7 @@ import { store } from "../store/store";
 const PATH = 'http://localhost:3000';
 const GARAGE = `${PATH}/garage`;
 const ENGINE = `${PATH}/engine/`;
-const WINNERS = `${PATH}/winners`;
+export const WINNERS = `${PATH}/winners`;
 const PAGE = `?_page=`;
 const LIMIT = `&_limit=`;
 const EngineParam = {

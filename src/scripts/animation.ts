@@ -1,7 +1,7 @@
-import { IObjNumber } from "../types/types";
+import { ObjNumber } from "../types/types";
 
 export function animation(car: HTMLElement, distance: number, time: number) {
-    const state: IObjNumber = {};
+    const state: ObjNumber = {};
     const startTime = new Date().getTime();
     async function getInterval() {
         const currTime = new Date().getTime();

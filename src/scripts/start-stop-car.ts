@@ -16,7 +16,6 @@ export const startCarAnimation = async (id: number): Promise<WinnersCars> => {
     const time = Math.round(distance / velocity);
 
     const car: HTMLElement | null = document.querySelector(`.car-${id}`);
-
     const flag: HTMLElement | null = document.querySelector(`.flag-${id}`);
 
     const currentDistance = Math.floor(addDistance((car as HTMLElement), (flag as HTMLElement)));
