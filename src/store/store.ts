@@ -6,4 +6,5 @@ export const store: StorageObj = {
   idCar: null,
   winners: 1,
   pages: 1,
+  winnersArr: [],
 };

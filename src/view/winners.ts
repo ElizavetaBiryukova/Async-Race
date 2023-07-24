@@ -1,4 +1,5 @@
 import { createTitleTemplate } from "./title";
+import { createWinnersListTemplate } from "./winners-list";
 
 const createWinnersTemplate = (): string => {
     return `
@@ -13,13 +14,7 @@ const createWinnersTemplate = (): string => {
             <th>Best time (seconds)</th>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>111</td>
-                <td>Tesla</td>
-                <td>0</td>
-                <td>100000</td>
-            </tr>
+        ${createWinnersListTemplate()}
         </tbody>
     </table>
 </section>

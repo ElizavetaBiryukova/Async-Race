@@ -29,6 +29,12 @@ export const updateCarsStore = async () => {
     store.cars = count;
 };
 
+export const updateWinnersStore = async () => {
+    const { items, count } = await getWinners();
+    store.winnersArr = items;
+    store.winners = count;
+};
+
 export const getCar = async (id: number): Promise<Car> =>
     (
         await fetch(`${GARAGE}/${id}`, {

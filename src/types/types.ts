@@ -4,6 +4,7 @@ export interface StorageObj {
   idCar: number | null,
   winners: number,
   pages: number,
+  winnersArr: Array<Winner>
 }
 
 export interface Car {
