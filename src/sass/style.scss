@@ -1,4 +1,5 @@
 .body {
+    position: relative;
     background: black;
     min-height: 100%;
     margin: 0;
@@ -176,6 +177,25 @@ tbody {
 }
 
 .control-start:disabled,
-.control-stop:disabled{
+.control-stop:disabled,
+.update-input:disabled,
+.update-color:disabled,
+.button-update:disabled,
+.prev-button:disabled,
+.next-button:disabled {
     background: grey;
+}
+
+.message {
+    position: absolute;
+    left: 25%;
+    top: 30%;
+    width: 40%;
+    height: 10%;
+    background-color: yellow;
+    color: black;
+    font-size: 25px;
+    font-weight: 900;
+    text-align: center;
+    padding-top: 7%;
 }

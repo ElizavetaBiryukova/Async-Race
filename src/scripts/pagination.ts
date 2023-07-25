@@ -3,6 +3,7 @@ import { updateCarsStore, updateWinnersStore } from "./api";
 import { createTitle, createPages } from "../view/title";
 import { createWinnersListTemplate } from "../view/winners-list";
 import { createGarageListTemplate } from "../view/garage-list";
+import { disabledPagination } from "./disabled-pagination";
 
 
 export async function addPagination() {
@@ -16,6 +17,7 @@ export async function addPagination() {
     const garageList: HTMLElement | null = document.querySelector('.garage-list');
     const garageTitle: HTMLElement | null = document.querySelector('.title-garage');
     const garagePage: HTMLElement | null = document.querySelector('.page-garage');
+
 
 
     prevButton?.addEventListener('click', async () => {
@@ -37,6 +39,7 @@ export async function addPagination() {
                 break;
             }
         }
+        disabledPagination();
     });
 
     nextButton?.addEventListener('click', async () => {
@@ -47,6 +50,16 @@ export async function addPagination() {
                 (garageList as HTMLElement).innerHTML = createGarageListTemplate();
                 (garageTitle as HTMLElement).innerHTML = createTitle('Garage');
                 (garagePage as HTMLElement).innerHTML = createPages('Garage');
+                if (store.carsPage * 7 < store.cars) {
+                    (nextButton as HTMLButtonElement).disabled = false;
+                } else {
+                    (nextButton as HTMLButtonElement).disabled = true;
+                }
+                if (store.carsPage > 1) {
+                    (prevButton as HTMLButtonElement).disabled = false;
+                } else {
+                    (prevButton as HTMLButtonElement).disabled = true;
+                }
                 break;
             }
             case 'winners': {
@@ -58,5 +71,6 @@ export async function addPagination() {
                 break;
             }
         }
+        disabledPagination();
     });
 }

@@ -4,6 +4,7 @@ import { CreateCar } from "../types/types";
 import { createCar, updateCarsStore } from "./api";
 import { createGarageListTemplate } from "../view/garage-list";
 import { createTitle } from "../view/title";
+import { disabledPagination } from "./disabled-pagination";
 
 const generateName = (): string => {
     const randomIndexNames = getRandomInteger(0, carsNames.length - 1);
@@ -33,5 +34,6 @@ export const generateCars = async () => {
         (garageList as HTMLElement).innerHTML = createGarageListTemplate();
         (garageTitle as HTMLElement).innerHTML = createTitle('Garage');
 
+        disabledPagination();
     })
 }

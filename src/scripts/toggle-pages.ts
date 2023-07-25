@@ -1,4 +1,5 @@
 import { store } from "../store/store";
+import { disabledPagination } from "./disabled-pagination";
 
 export const togglePage = async () => {
     const garageButton: HTMLElement | null = document.querySelector('.button-garage');
@@ -13,6 +14,7 @@ export const togglePage = async () => {
         (consoleBoard as HTMLElement).style.display = 'block';
 
         store.openSection = 'garage';
+        disabledPagination();
     })
 
     winnersButton?.addEventListener('click', async () => {
@@ -21,6 +23,7 @@ export const togglePage = async () => {
         (winnersBoard as HTMLElement).style.display = 'block';
 
         store.openSection = 'winners';
+        disabledPagination();
     })
 
 }

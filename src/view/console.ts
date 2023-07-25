@@ -8,9 +8,9 @@ const createConsoleTemplate = (): string => {
         <button class="button button-form button-create" type="submit">Create</button>
     </form>
     <form action="" class="form">
-        <input type="text" class="input update-input" name="name" autocomplete="given-name" value="">
-        <input type="color" class="color update-color" value="#ffffff" name="color">
-        <button class="button button-form button-update" type="submit">Update</button>
+        <input type="text" class="input update-input" name="name" disabled autocomplete="given-name" value="">
+        <input type="color" class="color update-color" value="#ffffff" name="color" disabled>
+        <button class="button button-form button-update" type="submit" disabled>Update</button>
     </form>
 </div>
 

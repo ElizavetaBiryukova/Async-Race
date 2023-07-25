@@ -46,6 +46,17 @@ const race = async (prom: (id: number) => Promise<WinnersCars>) => {
     return winner;
 };
 
+const addWinnerMessage = (winner: NewWinner) => {
+    const body: HTMLElement | null = document.querySelector('.body');
+    const message = document.createElement('div');
+    (message as HTMLElement).className = 'message';
+    (message as HTMLElement).innerHTML = `${winner.name} went first in ${winner.time} seconds!`;
+    body?.append((message as HTMLElement));
+
+
+    setTimeout(() => {message.remove()}, 4000);
+}
+
 export async function addRace() {
     const raceButton: HTMLElement | null = document.querySelector('.race-button');
     const winnersList: HTMLElement | null = document.querySelector('.winners-list');
@@ -54,6 +65,7 @@ export async function addRace() {
 
     raceButton?.addEventListener('click', async () => {
         const winner = await race(startCarAnimation);
+        addWinnerMessage(winner);
         await saveWinners(winner);
         await updateWinnersStore();
         (winnersList as HTMLElement).innerHTML = createWinnersListTemplate();
