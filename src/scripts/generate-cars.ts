@@ -1,10 +1,11 @@
 import { getRandomInteger } from "./util";
-import { carsNames, carsModels } from "./const";
+import { carsNames, carsModels, CarColor, HUNDRED_CARS } from "./const";
 import { CreateCar } from "../types/types";
 import { createCar, updateCarsStore } from "./api";
 import { createGarageListTemplate } from "../view/garage-list";
 import { createTitle } from "../view/title";
 import { disabledPagination } from "./disabled-pagination";
+import { OpenSection } from "./const";
 
 const generateName = (): string => {
     const randomIndexNames = getRandomInteger(0, carsNames.length - 1);
@@ -13,27 +14,29 @@ const generateName = (): string => {
 };
 
 const generateColor = (): string => {
-    return '#' + (Math.random().toString(16) + '000000').substring(2, 8).toUpperCase();
+    return CarColor.HASH + (Math.random().toString(16) + CarColor.INIT_COLOR).substring(CarColor.START_INDEX, CarColor.END_INDEX).toUpperCase();
 };
 
-export const generateCar = (): CreateCar => ({
+const generateCar = (): CreateCar => ({
     name: generateName(),
     color: generateColor(),
 });
 
-export const generateCars = async () => {
+const generateCars = async (): Promise<void> => {
     const generateCarsButton: HTMLElement | null = document.querySelector('.generator-button');
     const garageList: HTMLElement | null = document.querySelector('.garage-list');
     const garageTitle: HTMLElement | null = document.querySelector('.title-garage');
 
-    generateCarsButton?.addEventListener('click', async () => {
-        const hundredCars: CreateCar[] = new Array(100).fill(0).map(generateCar);
+    generateCarsButton?.addEventListener('click', async (): Promise<void> => {
+        const hundredCars: CreateCar[] = new Array(HUNDRED_CARS).fill(0).map(generateCar);
 
         await Promise.all(hundredCars.map(async (car) => createCar(car)));
         await updateCarsStore();
         (garageList as HTMLElement).innerHTML = createGarageListTemplate();
-        (garageTitle as HTMLElement).innerHTML = createTitle('Garage');
+        (garageTitle as HTMLElement).innerHTML = createTitle(OpenSection.GARAGE);
 
         disabledPagination();
     })
 }
+
+export { generateCars }

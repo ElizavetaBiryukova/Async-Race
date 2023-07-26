@@ -4,9 +4,9 @@ import { createTitle, createPages } from "../view/title";
 import { createWinnersListTemplate } from "../view/winners-list";
 import { createGarageListTemplate } from "../view/garage-list";
 import { disabledPagination } from "./disabled-pagination";
+import { OpenSection } from "./const";
 
-
-export async function addPagination() {
+const addPagination = async (): Promise<void> => {
     const prevButton: HTMLElement | null = document.querySelector('.prev-button');
     const nextButton: HTMLElement | null = document.querySelector('.next-button');
 
@@ -19,58 +19,49 @@ export async function addPagination() {
     const garagePage: HTMLElement | null = document.querySelector('.page-garage');
 
 
-
-    prevButton?.addEventListener('click', async () => {
+    prevButton?.addEventListener('click', async (): Promise<void> => {
         switch (store.openSection) {
-            case 'garage': {
+            case OpenSection.GARAGE: {
                 store.carsPage -= 1;
                 await updateCarsStore();
                 (garageList as HTMLElement).innerHTML = createGarageListTemplate();
-                (garageTitle as HTMLElement).innerHTML = createTitle('Garage');
-                (garagePage as HTMLElement).innerHTML = createPages('Garage');
+                (garageTitle as HTMLElement).innerHTML = createTitle(OpenSection.GARAGE);
+                (garagePage as HTMLElement).innerHTML = createPages(OpenSection.GARAGE);
                 break;
             }
-            case 'winners': {
+            case OpenSection.WINNERS: {
                 store.winnersPage -= 1;
                 await updateWinnersStore();
                 (winnersList as HTMLElement).innerHTML = createWinnersListTemplate();
-                (winnersTitle as HTMLElement).innerHTML = createTitle('Winners');
-                (winnersPage as HTMLElement).innerHTML = createPages('Winners');
+                (winnersTitle as HTMLElement).innerHTML = createTitle(OpenSection.WINNERS);
+                (winnersPage as HTMLElement).innerHTML = createPages(OpenSection.WINNERS);
                 break;
             }
         }
         disabledPagination();
     });
 
-    nextButton?.addEventListener('click', async () => {
+    nextButton?.addEventListener('click', async (): Promise<void> => {
         switch (store.openSection) {
-            case 'garage': {
+            case OpenSection.GARAGE: {
                 store.carsPage += 1;
                 await updateCarsStore();
                 (garageList as HTMLElement).innerHTML = createGarageListTemplate();
-                (garageTitle as HTMLElement).innerHTML = createTitle('Garage');
-                (garagePage as HTMLElement).innerHTML = createPages('Garage');
-                if (store.carsPage * 7 < store.cars) {
-                    (nextButton as HTMLButtonElement).disabled = false;
-                } else {
-                    (nextButton as HTMLButtonElement).disabled = true;
-                }
-                if (store.carsPage > 1) {
-                    (prevButton as HTMLButtonElement).disabled = false;
-                } else {
-                    (prevButton as HTMLButtonElement).disabled = true;
-                }
+                (garageTitle as HTMLElement).innerHTML = createTitle(OpenSection.GARAGE);
+                (garagePage as HTMLElement).innerHTML = createPages(OpenSection.GARAGE);
                 break;
             }
-            case 'winners': {
+            case OpenSection.WINNERS: {
                 store.winnersPage += 1;
                 await updateWinnersStore();
                 (winnersList as HTMLElement).innerHTML = createWinnersListTemplate();
-                (winnersTitle as HTMLElement).innerHTML = createTitle('Winners');
-                (winnersPage as HTMLElement).innerHTML = createPages('Winners');
+                (winnersTitle as HTMLElement).innerHTML = createTitle(OpenSection.WINNERS);
+                (winnersPage as HTMLElement).innerHTML = createPages(OpenSection.WINNERS);
                 break;
             }
         }
         disabledPagination();
     });
 }
+
+export { addPagination }

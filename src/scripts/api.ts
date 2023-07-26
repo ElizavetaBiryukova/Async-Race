@@ -1,20 +1,7 @@
 import { Car, Cars, CreateCar, CarMovement, Winners, GetWinners, Engine } from "../types/types";
 import { store } from "../store/store";
+import { GARAGE, ENGINE, WINNERS, PAGE, LIMIT, EngineParam, EngineStatus } from "../scripts/const";
 
-const PATH = 'http://localhost:3000';
-const GARAGE = `${PATH}/garage`;
-const ENGINE = `${PATH}/engine/`;
-export const WINNERS = `${PATH}/winners`;
-const PAGE = `?_page=`;
-const LIMIT = `&_limit=`;
-const EngineParam = {
-    ID: '?id=',
-    STATUS: '&status=',
-};
-const EngineStatus = {
-    START: 'started',
-    STOP: 'stopped',
-}
 
 export const getCars = async (page: number, limit = 7): Promise<Cars> => {
     const res = await fetch(`${GARAGE}${PAGE}${page}${LIMIT}${limit}`);
@@ -25,13 +12,13 @@ export const getCars = async (page: number, limit = 7): Promise<Cars> => {
     return carsCount;
 };
 
-export const updateCarsStore = async () => {
+export const updateCarsStore = async (): Promise<void> => {
     const { items, count } = await getCars(store.carsPage);
     store.carsArr = items;
     store.cars = count;
 };
 
-export const updateWinnersStore = async () => {
+export const updateWinnersStore = async (): Promise<void> => {
     const { items, count } = await getWinners(store.winnersPage);
     store.winnersArr = items;
     store.winners = count;
@@ -44,7 +31,7 @@ export const getCar = async (id: number): Promise<Car> =>
         })
     ).json();
 
-export const createCar = async (car: CreateCar) =>
+export const createCar = async (car: CreateCar): Promise<void> =>
     (
         await fetch(`${GARAGE}`, {
             method: 'POST',
@@ -55,14 +42,14 @@ export const createCar = async (car: CreateCar) =>
         })
     ).json();
 
-export const deleteCar = async (id: number) =>
+export const deleteCar = async (id: number): Promise<void> =>
     (
         await fetch(`${GARAGE}/${id}`, {
             method: 'DELETE',
         })
     ).json();
 
-export const updateCar = async (car: CreateCar, id: number) =>
+export const updateCar = async (car: CreateCar, id: number): Promise<void> =>
     (
         await fetch(`${GARAGE}/${id}`, {
             method: 'PUT',
@@ -109,14 +96,14 @@ export const getWinner = async (id: number): Promise<Winners> =>
         })
     ).json();
 
-export const deleteWinner = async (id: number) =>
+export const deleteWinner = async (id: number): Promise<void> =>
     (
         await fetch(`${WINNERS}/${id}`, {
             method: 'DELETE',
         })
     ).json();
 
-export const createWinner = async (body: Winners) =>
+export const createWinner = async (body: Winners): Promise<void> =>
     (
         await fetch(`${WINNERS}`, {
             method: 'POST',
@@ -127,7 +114,7 @@ export const createWinner = async (body: Winners) =>
         })
     ).json();
 
-export const updateWinner = async (id: number, body: Winners) =>
+export const updateWinner = async (id: number, body: Winners): Promise<void> =>
     (
         await fetch(`${WINNERS}/${id}`, {
             method: 'PUT',

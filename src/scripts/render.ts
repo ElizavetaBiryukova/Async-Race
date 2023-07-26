@@ -21,8 +21,4 @@ const render = (container: HTMLElement, child: string, place: string): void => {
     }
 };
 
-// const remove = (component: HTMLElement | null) => {
-//     (component as HTMLElement).remove();
-// };
-
 export { createElement, render }

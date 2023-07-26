@@ -1,18 +1,19 @@
 import { store } from '../store/store';
 import { WinnersCars, NewWinner, WinnerCar, Winners } from '../types/types';
 import { startCarAnimation, stopCarAnimation } from './start-stop-car';
-import { WINNERS, createWinner, getWinner, updateWinner, updateWinnersStore } from './api';
+import { createWinner, getWinner, updateWinner, updateWinnersStore } from './api';
 import { createTitle } from "../view/title";
 import { createWinnersListTemplate } from "../view/winners-list";
+import { WINNERS, STATUS, FIRST_WINS, OpenSection } from './const';
 
-export const getWinnerStatus = async (id: number) => (await fetch(`${WINNERS}/${id}`)).status;
+const getWinnerStatus = async (id: number): Promise<number> => (await fetch(`${WINNERS}/${id}`)).status;
 
-export const saveWinners = async ({ id, time }: NewWinner) => {
+const saveWinners = async ({ id, time }: NewWinner): Promise<void> => {
     const winnerStatus = await getWinnerStatus(id);
-    if (winnerStatus === 404) {
+    if (winnerStatus === STATUS) {
         await createWinner({
             id,
-            wins: 1,
+            wins: FIRST_WINS,
             time,
         });
     } else {
@@ -37,7 +38,7 @@ const getWinnerRace = async (promises: Promise<WinnersCars>[], ids: number[]): P
     return { ...store.carsArr.find((car) => car.id === id), time: +(time / 1000).toFixed(2) };
 };
 
-const race = async (prom: (id: number) => Promise<WinnersCars>) => {
+const race = async (prom: (id: number) => Promise<WinnersCars>): Promise<NewWinner> => {
     const promises = store.carsArr.map(({ id }) => prom(id));
     const winner = (await getWinnerRace(
         promises,
@@ -46,35 +47,36 @@ const race = async (prom: (id: number) => Promise<WinnersCars>) => {
     return winner;
 };
 
-const addWinnerMessage = (winner: NewWinner) => {
+const addWinnerMessage = (winner: NewWinner): void => {
     const body: HTMLElement | null = document.querySelector('.body');
     const message = document.createElement('div');
     (message as HTMLElement).className = 'message';
     (message as HTMLElement).innerHTML = `${winner.name} went first in ${winner.time} seconds!`;
-    body?.append((message as HTMLElement));
+    (body as HTMLElement).append((message as HTMLElement));
 
-
-    setTimeout(() => {message.remove()}, 4000);
+    setTimeout((): void => { message.remove() }, 4000);
 }
 
-export async function addRace() {
+const addRace = async (): Promise<void> => {
     const raceButton: HTMLElement | null = document.querySelector('.race-button');
     const winnersList: HTMLElement | null = document.querySelector('.winners-list');
     const winnersTitle: HTMLElement | null = document.querySelector('.title-winners');
     const resetButton: HTMLElement | null = document.querySelector('.reset-button');
 
-    raceButton?.addEventListener('click', async () => {
+    raceButton?.addEventListener('click', async (): Promise<void> => {
         const winner = await race(startCarAnimation);
         addWinnerMessage(winner);
         await saveWinners(winner);
         await updateWinnersStore();
         (winnersList as HTMLElement).innerHTML = createWinnersListTemplate();
-        (winnersTitle as HTMLElement).innerHTML = createTitle('Winners');
+        (winnersTitle as HTMLElement).innerHTML = createTitle(OpenSection.WINNERS);
     });
 
-    resetButton?.addEventListener('click', async () => {
+    resetButton?.addEventListener('click', async (): Promise<void> => {
         store.carsArr.map(({ id }) => {
             stopCarAnimation(id);
         });
     })
 }
+
+export { addRace, saveWinners, getWinnerStatus}

@@ -15,8 +15,7 @@ import { addRace } from "./race";
 
 const siteBodyElement: HTMLElement | null = document.querySelector('.body');
 
-
-const renderPage = async () => {
+const renderPage = async (): Promise<void> => {
     await updateCarsStore();
     await updateWinnersStore();
     render(siteBodyElement as HTMLElement, createHeaderTemplate(), RenderPosition.AFTERBEGIN);

@@ -2,12 +2,12 @@ import { getCar } from "./api";
 import { store } from "../store/store";
 import { validedUpdate } from "./valided-update";
 
-export const selectCar = async () => {
+const selectCar = async (): Promise<void> => {
     const garage: HTMLElement | null = document.querySelector('.garage-list');
     const updateName: HTMLInputElement | null = document.querySelector('.update-input');
     const updateColor: HTMLInputElement | null = document.querySelector('.update-color');
 
-    garage?.addEventListener('click', async (event) => {
+    garage?.addEventListener('click', async (event): Promise<void> => {
         if ((event.target as HTMLElement).classList.contains('select-button')) {
             validedUpdate();
             const carId = Number(((event.target as HTMLElement).closest('li.car-item') as HTMLElement).id.replace('car-', ''));
@@ -18,3 +18,5 @@ export const selectCar = async () => {
         }
     })
 }
+
+export { selectCar }

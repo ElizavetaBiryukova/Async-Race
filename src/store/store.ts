@@ -8,6 +8,6 @@ export const store: StorageObj = {
   carsPage: 1,
   winnersPage: 1,
   winnersArr: [],
-  openSection: 'garage',
+  openSection: 'Garage',
   animation: {},
 };

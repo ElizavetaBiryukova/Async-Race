@@ -1,6 +1,6 @@
 import { ObjNumber } from "../types/types";
 
-export function animation(car: HTMLElement, distance: number, time: number) {
+const animation = (car: HTMLElement, distance: number, time: number): ObjNumber => {
     const state: ObjNumber = {};
     const startTime = new Date().getTime();
     async function getInterval() {
@@ -15,3 +15,5 @@ export function animation(car: HTMLElement, distance: number, time: number) {
     state.id = window.requestAnimationFrame(getInterval);
     return state;
 }
+
+export {animation}

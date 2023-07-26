@@ -1,28 +1,29 @@
 import { store } from "../store/store";
 import { disabledPagination } from "./disabled-pagination";
+import { OpenSection, DISPLAY_BLOCK, DISPLAY_NONE } from "./const";
 
-export const togglePage = async () => {
+export const togglePage = async (): Promise<void> => {
     const garageButton: HTMLElement | null = document.querySelector('.button-garage');
     const garageBoard: HTMLElement | null = document.querySelector('.garage');
     const winnersButton: HTMLElement | null = document.querySelector('.button-winner');
     const winnersBoard: HTMLElement | null = document.querySelector('.winners');
     const consoleBoard: HTMLElement | null = document.querySelector('.console');
 
-    garageButton?.addEventListener('click', async () => {
-        (winnersBoard as HTMLElement).style.display = 'none';
-        (garageBoard as HTMLElement).style.display = 'block';
-        (consoleBoard as HTMLElement).style.display = 'block';
+    garageButton?.addEventListener('click', async (): Promise<void> => {
+        (winnersBoard as HTMLElement).style.display = DISPLAY_NONE;
+        (garageBoard as HTMLElement).style.display = DISPLAY_BLOCK;
+        (consoleBoard as HTMLElement).style.display = DISPLAY_BLOCK;
 
-        store.openSection = 'garage';
+        store.openSection = OpenSection.GARAGE;
         disabledPagination();
     })
 
-    winnersButton?.addEventListener('click', async () => {
-        (garageBoard as HTMLElement).style.display = 'none';
-        (consoleBoard as HTMLElement).style.display = 'none';
-        (winnersBoard as HTMLElement).style.display = 'block';
+    winnersButton?.addEventListener('click', async (): Promise<void> => {
+        (garageBoard as HTMLElement).style.display = DISPLAY_NONE;
+        (consoleBoard as HTMLElement).style.display = DISPLAY_NONE;
+        (winnersBoard as HTMLElement).style.display = DISPLAY_BLOCK;
 
-        store.openSection = 'winners';
+        store.openSection = OpenSection.WINNERS;
         disabledPagination();
     })
 
