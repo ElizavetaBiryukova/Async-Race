@@ -2,9 +2,8 @@ import { store } from '../store/store';
 import { WinnersCars, NewWinner, WinnerCar, Winners } from '../types/types';
 import { startCarAnimation, stopCarAnimation } from './start-stop-car';
 import { createWinner, getWinner, updateWinner, updateWinnersStore } from './api';
-import { createTitle } from "../view/title";
-import { createWinnersListTemplate } from "../view/winners-list";
-import { WINNERS, STATUS, FIRST_WINS, OpenSection } from './const';
+import { WINNERS, STATUS, FIRST_WINS } from './const';
+import { updateWinnersTemplate } from './update-template';
 
 const getWinnerStatus = async (id: number): Promise<number> => (await fetch(`${WINNERS}/${id}`)).status;
 
@@ -59,8 +58,6 @@ const addWinnerMessage = (winner: NewWinner): void => {
 
 const addRace = async (): Promise<void> => {
     const raceButton: HTMLElement | null = document.querySelector('.race-button');
-    const winnersList: HTMLElement | null = document.querySelector('.winners-list');
-    const winnersTitle: HTMLElement | null = document.querySelector('.title-winners');
     const resetButton: HTMLElement | null = document.querySelector('.reset-button');
 
     raceButton?.addEventListener('click', async (): Promise<void> => {
@@ -68,8 +65,7 @@ const addRace = async (): Promise<void> => {
         addWinnerMessage(winner);
         await saveWinners(winner);
         await updateWinnersStore();
-        (winnersList as HTMLElement).innerHTML = createWinnersListTemplate();
-        (winnersTitle as HTMLElement).innerHTML = createTitle(OpenSection.WINNERS);
+        updateWinnersTemplate();
     });
 
     resetButton?.addEventListener('click', async (): Promise<void> => {

@@ -1,21 +1,15 @@
 import { store } from "../store/store";
 import { updateCarsStore, updateWinnersStore } from "./api";
-import { createTitle, createPages } from "../view/title";
-import { createWinnersListTemplate } from "../view/winners-list";
-import { createGarageListTemplate } from "../view/garage-list";
+import { createPages } from "../view/title";
 import { disabledPagination } from "./disabled-pagination";
 import { OpenSection } from "./const";
+import { updateGarageTemplate, updateWinnersTemplate } from "./update-template";
+
 
 const addPagination = async (): Promise<void> => {
     const prevButton: HTMLElement | null = document.querySelector('.prev-button');
     const nextButton: HTMLElement | null = document.querySelector('.next-button');
-
-    const winnersList: HTMLElement | null = document.querySelector('.winners-list');
-    const winnersTitle: HTMLElement | null = document.querySelector('.title-winners');
     const winnersPage: HTMLElement | null = document.querySelector('.page-winners');
-
-    const garageList: HTMLElement | null = document.querySelector('.garage-list');
-    const garageTitle: HTMLElement | null = document.querySelector('.title-garage');
     const garagePage: HTMLElement | null = document.querySelector('.page-garage');
 
 
@@ -24,16 +18,14 @@ const addPagination = async (): Promise<void> => {
             case OpenSection.GARAGE: {
                 store.carsPage -= 1;
                 await updateCarsStore();
-                (garageList as HTMLElement).innerHTML = createGarageListTemplate();
-                (garageTitle as HTMLElement).innerHTML = createTitle(OpenSection.GARAGE);
+                updateGarageTemplate();
                 (garagePage as HTMLElement).innerHTML = createPages(OpenSection.GARAGE);
                 break;
             }
             case OpenSection.WINNERS: {
                 store.winnersPage -= 1;
                 await updateWinnersStore();
-                (winnersList as HTMLElement).innerHTML = createWinnersListTemplate();
-                (winnersTitle as HTMLElement).innerHTML = createTitle(OpenSection.WINNERS);
+                updateWinnersTemplate();
                 (winnersPage as HTMLElement).innerHTML = createPages(OpenSection.WINNERS);
                 break;
             }
@@ -46,16 +38,14 @@ const addPagination = async (): Promise<void> => {
             case OpenSection.GARAGE: {
                 store.carsPage += 1;
                 await updateCarsStore();
-                (garageList as HTMLElement).innerHTML = createGarageListTemplate();
-                (garageTitle as HTMLElement).innerHTML = createTitle(OpenSection.GARAGE);
+                updateGarageTemplate();
                 (garagePage as HTMLElement).innerHTML = createPages(OpenSection.GARAGE);
                 break;
             }
             case OpenSection.WINNERS: {
                 store.winnersPage += 1;
                 await updateWinnersStore();
-                (winnersList as HTMLElement).innerHTML = createWinnersListTemplate();
-                (winnersTitle as HTMLElement).innerHTML = createTitle(OpenSection.WINNERS);
+                updateWinnersTemplate();
                 (winnersPage as HTMLElement).innerHTML = createPages(OpenSection.WINNERS);
                 break;
             }

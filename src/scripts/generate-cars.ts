@@ -2,10 +2,11 @@ import { getRandomInteger } from "./util";
 import { carsNames, carsModels, CarColor, HUNDRED_CARS } from "./const";
 import { CreateCar } from "../types/types";
 import { createCar, updateCarsStore } from "./api";
-import { createGarageListTemplate } from "../view/garage-list";
-import { createTitle } from "../view/title";
+// import { createGarageListTemplate } from "../view/garage-list";
+// import { createTitle } from "../view/title";
 import { disabledPagination } from "./disabled-pagination";
-import { OpenSection } from "./const";
+// import { OpenSection } from "./const";
+import { updateGarageTemplate } from "./update-template";
 
 const generateName = (): string => {
     const randomIndexNames = getRandomInteger(0, carsNames.length - 1);
@@ -24,18 +25,15 @@ const generateCar = (): CreateCar => ({
 
 const generateCars = async (): Promise<void> => {
     const generateCarsButton: HTMLElement | null = document.querySelector('.generator-button');
-    const garageList: HTMLElement | null = document.querySelector('.garage-list');
-    const garageTitle: HTMLElement | null = document.querySelector('.title-garage');
 
     generateCarsButton?.addEventListener('click', async (): Promise<void> => {
         const hundredCars: CreateCar[] = new Array(HUNDRED_CARS).fill(0).map(generateCar);
 
         await Promise.all(hundredCars.map(async (car) => createCar(car)));
         await updateCarsStore();
-        (garageList as HTMLElement).innerHTML = createGarageListTemplate();
-        (garageTitle as HTMLElement).innerHTML = createTitle(OpenSection.GARAGE);
 
         disabledPagination();
+        updateGarageTemplate();
     })
 }
 
