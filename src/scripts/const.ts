@@ -48,6 +48,11 @@ const STOP_STYLE_CAR = 'translateX(0)';
 const DISPLAY_BLOCK = 'block';
 const DISPLAY_NONE = 'none';
 
+const Sort = {
+    WINS: 'wins',
+    TIME: 'time',
+}
+
 const carsNames = [
     'Audi',
     'Alfa Romeo',
@@ -141,4 +146,4 @@ const carsModels = [
     'FX37',
 ];
 
-export {DISPLAY_BLOCK, DISPLAY_NONE, STOP_STYLE_CAR, FIRST_WINS, STATUS, HUNDRED_CARS, CarColor, FIRST_PAGE, NumberPerPage, OpenSection, RenderPosition, PATH, GARAGE, ENGINE, WINNERS, PAGE, LIMIT, EngineParam, EngineStatus, carsNames, carsModels }
+export { Sort, DISPLAY_BLOCK, DISPLAY_NONE, STOP_STYLE_CAR, FIRST_WINS, STATUS, HUNDRED_CARS, CarColor, FIRST_PAGE, NumberPerPage, OpenSection, RenderPosition, PATH, GARAGE, ENGINE, WINNERS, PAGE, LIMIT, EngineParam, EngineStatus, carsNames, carsModels }
