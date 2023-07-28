@@ -1,7 +1,7 @@
 import { Car, Cars, CreateCar, CarMovement, Winners, GetWinners, Engine } from "../types/types";
 import { store } from "../store/store";
-import { GARAGE, ENGINE, WINNERS, PAGE, LIMIT, EngineParam, EngineStatus } from "../scripts/const";
-
+import { GARAGE, ENGINE, WINNERS, PAGE, LIMIT, EngineParam, EngineStatus, NumberPerPage } from "../scripts/const";
+import { addSort } from "./sort-winners";
 
 export const getCars = async (page: number, limit = 7): Promise<Cars> => {
     const res = await fetch(`${GARAGE}${PAGE}${page}${LIMIT}${limit}`);
@@ -19,7 +19,7 @@ export const updateCarsStore = async (): Promise<void> => {
 };
 
 export const updateWinnersStore = async (): Promise<void> => {
-    const { items, count } = await getWinners(store.winnersPage);
+    const { items, count } = await getWinners(store.winnersPage, NumberPerPage.WINNERS, store.sortValue, store.sortOrder);
     store.winnersArr = items;
     store.winners = count;
 };
@@ -79,8 +79,8 @@ export const driveCar = async (id: number): Promise<Engine> => {
     return res.status === 200 ? { ...(await res.json()) } : { success: false };
 };
 
-export const getWinners = async (page: number, limit = 10): Promise<GetWinners> => {
-    const res = await fetch(`${WINNERS}${PAGE}${page}${LIMIT}${limit}`);
+export const getWinners = async (page: number, limit = NumberPerPage.WINNERS, sort: string | null, order: string | null): Promise<GetWinners> => {
+    const res = await fetch(`${WINNERS}${PAGE}${page}${LIMIT}${limit}&${addSort(sort, order)}`);
     const items = await res.json();
 
     return {

@@ -10,4 +10,6 @@ export const store: StorageObj = {
   winnersArr: [],
   openSection: 'Garage',
   animation: {},
+  sortValue: 'id',
+  sortOrder: null,
 };

@@ -10,8 +10,8 @@ const createWinnersTemplate = (): string => {
             <th>Number</th>
             <th>Car</th>
             <th>Name</th>
-            <th>Wins</th>
-            <th>Best time (seconds)</th>
+            <th class='wins'>Wins</th>
+            <th class='time'>Best time (seconds)</th>
         </thead>
         <tbody class="winners-list">
         ${createWinnersListTemplate()}

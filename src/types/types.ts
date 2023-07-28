@@ -8,6 +8,8 @@ export interface StorageObj {
   winnersArr: Array<Winner>,
   openSection: string,
   animation: Obj,
+  sortValue: string | null,
+  sortOrder: string | null,
 }
 
 export interface ObjNumber {

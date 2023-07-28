@@ -13,6 +13,7 @@ import { addPagination } from "./pagination";
 import { drivingCar } from "./start-stop-car";
 import { addRace } from "./race";
 import { OpenSection } from "./const";
+import { listenSort } from "./sort-winners";
 
 const siteBodyElement: HTMLElement | null = document.querySelector('.body');
 
@@ -31,6 +32,7 @@ const renderPage = async (): Promise<void> => {
     addPagination();
     drivingCar();
     addRace();
+    listenSort();
 }
 
 renderPage();
