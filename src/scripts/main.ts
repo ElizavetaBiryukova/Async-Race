@@ -12,6 +12,7 @@ import { updateCarEvent } from "./update-car";
 import { addPagination } from "./pagination";
 import { drivingCar } from "./start-stop-car";
 import { addRace } from "./race";
+import { OpenSection } from "./const";
 
 const siteBodyElement: HTMLElement | null = document.querySelector('.body');
 
@@ -20,6 +21,7 @@ const renderPage = async (): Promise<void> => {
     await updateWinnersStore();
     render(siteBodyElement as HTMLElement, createHeaderTemplate(), RenderPosition.AFTERBEGIN);
     render(siteBodyElement as HTMLElement, createMainTemplate(), RenderPosition.BEFOREEND);
+    window.location.hash = `#/${OpenSection.GARAGE}`;
     togglePage();
     generateCars();
     createCarEvent();

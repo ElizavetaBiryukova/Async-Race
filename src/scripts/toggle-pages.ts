@@ -9,20 +9,34 @@ export const togglePage = async (): Promise<void> => {
     const winnersBoard: HTMLElement | null = document.querySelector('.winners');
     const consoleBoard: HTMLElement | null = document.querySelector('.console');
 
-    garageButton?.addEventListener('click', async (): Promise<void> => {
-        (winnersBoard as HTMLElement).style.display = DISPLAY_NONE;
-        (garageBoard as HTMLElement).style.display = DISPLAY_BLOCK;
-        (consoleBoard as HTMLElement).style.display = DISPLAY_BLOCK;
+    const locationResolver = async (location: string): Promise<void> => {
+        switch (location) {
+            case `#/${OpenSection.GARAGE}`:
+                (winnersBoard as HTMLElement).style.display = DISPLAY_NONE;
+                (garageBoard as HTMLElement).style.display = DISPLAY_BLOCK;
+                (consoleBoard as HTMLElement).style.display = DISPLAY_BLOCK;
 
+                break;
+            case `#/${OpenSection.WINNERS}`:
+                (garageBoard as HTMLElement).style.display = DISPLAY_NONE;
+                (consoleBoard as HTMLElement).style.display = DISPLAY_NONE;
+                (winnersBoard as HTMLElement).style.display = DISPLAY_BLOCK;
+                break;
+            default:
+                break;
+        }
+    };
+
+    garageButton?.addEventListener('click', async (): Promise<void> => {
+        window.location.hash = `#/${OpenSection.GARAGE}`;
+        locationResolver(window.location.hash);
         store.openSection = OpenSection.GARAGE;
         disabledPagination();
     })
 
     winnersButton?.addEventListener('click', async (): Promise<void> => {
-        (garageBoard as HTMLElement).style.display = DISPLAY_NONE;
-        (consoleBoard as HTMLElement).style.display = DISPLAY_NONE;
-        (winnersBoard as HTMLElement).style.display = DISPLAY_BLOCK;
-
+        window.location.hash = `#/${OpenSection.WINNERS}`;
+        locationResolver(window.location.hash);
         store.openSection = OpenSection.WINNERS;
         disabledPagination();
     })
